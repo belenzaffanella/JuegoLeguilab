@@ -1,5 +1,10 @@
 # LeguiLab — Desafío Microbiota
 
+La historia del proyecto, las decisiones de diseño, las reglas completas, la
+arquitectura técnica, las pruebas y la publicación están documentadas en
+[DOCUMENTACION.md](DOCUMENTACION.md). Las referencias científicas y las
+precauciones de contenido están en [SOURCES.md](SOURCES.md).
+
 Abrí `index.html` en un navegador moderno. No requiere instalación, servidor, conexión ni dependencias externas. En cada ronda el cliente ingresa un nombre o apodo, elige **un solo producto** y responde cinco preguntas. El nombre se conserva solo durante esa ronda, en memoria del navegador; no se guarda ni se envía.
 
 Cada acierto vale 100 puntos. El umbral actual para ganar el premio es 400 puntos (4 de 5); se ajusta en `questions.js` (`prizeThreshold`). No se solicitan pistas ni hay casos integradores.
