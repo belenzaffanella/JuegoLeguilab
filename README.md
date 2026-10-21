@@ -4,6 +4,7 @@ La historia del proyecto, las decisiones de diseño, las reglas completas, la
 arquitectura técnica, las pruebas y la publicación están documentadas en
 [DOCUMENTACION.md](DOCUMENTACION.md). Las referencias científicas y las
 precauciones de contenido están en [SOURCES.md](SOURCES.md).
+La evolución del trabajo ordenada por fecha está en [EXPERIENCIA.md](EXPERIENCIA.md).
 
 Abrí `index.html` en un navegador moderno. No requiere instalación, servidor, conexión ni dependencias externas. En cada ronda el cliente ingresa un nombre o apodo, elige **un solo producto** y responde cinco preguntas. El nombre se conserva solo durante esa ronda, en memoria del navegador; no se guarda ni se envía.
 
