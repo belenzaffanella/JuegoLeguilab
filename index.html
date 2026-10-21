@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#160d2b">
+  <meta name="description" content="Trivia breve de LeguiLab sobre un producto y la microbiota intestinal.">
+  <title>Desafío Microbiota — LeguiLab</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles-extra.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <img class="logo" src="assets/leguilab-logo.png" alt="LeguiLab Health & Care">
+      <div class="top-actions"><span class="top-tag">DESAFÍO MICROBIOTA</span><button class="icon-btn" id="soundToggle" type="button" aria-label="Silenciar sonidos" title="Sonido">♫</button><button class="icon-btn" id="tvToggle" type="button" aria-label="Activar modo pantalla de stand" title="Modo pantalla">▣</button></div>
+    </header>
+    <main id="stage">
+      <canvas id="world" class="world" aria-hidden="true"></canvas>
+
+      <section class="screen home active" id="home" aria-labelledby="homeTitle">
+        <div class="home-copy">
+          <div class="eyebrow">UNA RONDA CORTA · UN SOLO PRODUCTO</div>
+          <h1 id="homeTitle">DESAFÍO<br><em>MICROBIOTA</em></h1>
+          <p class="subtitle">Conocé un producto en cinco preguntas.</p>
+          <p class="lead">Elegí una trivia breve sobre beneficios, cómo funciona y qué podemos afirmar con cuidado.</p>
+          <button class="play" id="startBtn" type="button">TOCÁ PARA EMPEZAR <span>↗</span></button>
+          <p class="home-foot">5 PREGUNTAS · 100 PUNTOS POR ACIERTO · 400 PUNTOS = PREMIO</p>
+        </div>
+        <div class="hero-products"><div class="hero-heading"><strong>ELEGÍ UN PRODUCTO EN TU RONDA</strong><span>FOTOS OFICIALES</span></div><div class="product-line" id="heroProducts"></div><div class="scene-caption"><span class="scene-pulse"></span>UNA TRIVIA POR PERSONA · SIN CASOS NI PISTAS</div></div>
+      </section>
+
+      <section class="screen name-screen" id="nameScreen" aria-labelledby="nameTitle">
+        <div class="form-card">
+          <div class="eyebrow">ANTES DE EMPEZAR</div>
+          <h2 id="nameTitle">¿CÓMO TE LLAMAMOS?</h2>
+          <p>Escribí tu nombre o apodo para mostrarlo al final de tu ronda.</p>
+          <label class="name-label" for="playerName">NOMBRE O APODO</label>
+          <input id="playerName" name="playerName" maxlength="24" autocomplete="off" placeholder="Por ejemplo: Sofía" enterkeyhint="go">
+          <button class="play" id="chooseProductBtn" type="button">CONTINUAR <span>→</span></button>
+          <button class="text-btn" id="backHomeBtn" type="button">VOLVER</button>
+        </div>
+      </section>
+
+      <section class="screen choose-screen" id="chooseScreen" aria-labelledby="chooseTitle">
+        <div class="choose-panel">
+          <div class="eyebrow">UNA SOLA TRIVIA PARA <b id="playerGreeting"></b></div>
+          <h2 id="chooseTitle">¿QUÉ PRODUCTO QUERÉS CONOCER?</h2>
+          <p class="choose-sub">A ver cuánto sabés: elegí el producto de tu trivia.</p>
+          <div class="product-line choose-products" id="chooseProducts"></div>
+          <p class="prize-rule"><strong>400 PUNTOS</strong> · 4 respuestas correctas para ganar un premio</p>
+          <button class="text-btn" id="backNameBtn" type="button">VOLVER A TU NOMBRE</button>
+        </div>
+      </section>
+
+      <section class="screen game" id="game" aria-label="Trivia en curso">
+        <div class="game-top">
+          <div class="round-label"><span>JUGANDO:</span><strong id="roundPlayer"></strong><i>·</i><b id="roundProduct"></b></div>
+          <div class="score-time"><div class="pill progress-pill"><small>PREGUNTA</small><strong id="questionNumber">1 / 5</strong></div><div class="pill score-pill"><small>PUNTAJE</small><strong id="score">0</strong></div></div>
+        </div>
+        <div class="quiz-area">
+          <article class="quiz-card" id="quizCard">
+            <div class="question-meta"><span id="questionCategory">BENEFICIOS</span><span>100 PTS POR ACIERTO</span></div>
+            <div class="question-layout">
+              <div class="product-focus" id="productFocus"><img id="focusImage" alt=""><div><small>PRODUCTO ELEGIDO</small><b id="focusName"></b><span id="focusIntro"></span></div></div>
+              <div class="question-main">
+                <div class="mini-diagram" id="miniDiagram" aria-label="Esquema del butirato y la célula del colon" hidden><div class="diagram-lumen"><span>INTESTINO</span><i class="molecule">BUTIRATO</i><b>→</b></div><div class="diagram-cell"><span>CÉLULA DEL COLON</span><div class="mito">ENERGÍA</div></div></div>
+                <h2 id="questionText"></h2>
+                <div class="answers" id="answers" role="group" aria-label="Opciones de respuesta"></div>
+                <div class="feedback" id="feedback" aria-live="polite" hidden><div class="feedback-mark" id="feedbackMark"></div><div class="feedback-copy"><b id="feedbackTitle"></b><p id="feedbackText"></p><button class="source-toggle" id="sourceToggle" type="button">VER FUENTE</button><div class="source-detail" id="sourceDetail" hidden></div></div></div>
+                <div class="question-actions"><button class="next-btn" id="nextBtn" type="button" hidden>CONTINUAR <span>→</span></button></div>
+              </div>
+            </div>
+          </article>
+          <aside class="ambient-note"><span>IDEA CLAVE</span>Un mecanismo posible no garantiza un resultado clínico.</aside>
+        </div>
+      </section>
+
+      <section class="screen result-wrap" id="results" aria-labelledby="resultTitle">
+        <article class="result-card">
+          <div class="eyebrow" id="resultEyebrow">RONDA COMPLETADA</div>
+          <h2 id="resultTitle">RESULTADO</h2>
+          <p class="result-message" id="resultMessage"></p>
+          <div class="winner-name" id="winnerName"></div>
+          <div class="result-stats"><div><strong id="finalScore">0</strong><small>PUNTOS</small></div><div><strong id="finalCorrect">0 / 5</strong><small>ACIERTOS</small></div></div>
+          <div class="result-product" id="resultProduct"></div>
+          <p class="result-disclaimer">Contenido educativo. No es una recomendación clínica.</p>
+          <div class="result-actions"><button class="play" id="replayBtn" type="button">OTRA RONDA <span>↻</span></button><button class="home-btn" id="homeBtn" type="button">VOLVER AL INICIO</button></div>
+        </article>
+      </section>
+    </main>
+    <footer class="footer"><span>LEGUILAB · DESAFÍO MICROBIOTA</span><span>CONTENIDO EDUCATIVO · SIN RECOMENDACIONES CLÍNICAS</span></footer>
+  </div>
+  <script src="questions.js"></script>
+  <script src="game-logic.js"></script>
+  <script src="scene.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
